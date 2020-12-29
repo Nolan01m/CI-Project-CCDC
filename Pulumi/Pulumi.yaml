@@ -1,0 +1,3 @@
+name: JC-CCDC
+runtime: nodejs
+description: Minimal Infra for CCDC
