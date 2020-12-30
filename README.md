@@ -1,5 +1,7 @@
 # CI-Project-CCDC
 
+[![Deploy](https://get.pulumi.com/new/button.svg)](https://app.pulumi.com/new)
+
 A project using Puppet and Pulumi to Deploy Competition Infrastructure. 
 
 

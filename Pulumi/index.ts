@@ -3,7 +3,9 @@ import * as pulumi from "@pulumi/pulumi";
 import * as gcp from "@pulumi/gcp";
 
 //VPC & Subnets
-const vpcNetwork = new gcp.compute.Network("vpc_network", { autoCreateSubnetworks: false, name:"nhlabs",});
+const vpcNetwork = new gcp.compute.Network("vpc_network", 
+    {autoCreateSubnetworks: false, name:"nhlabs", routingMode:"REGIONAL",});
+
 const Network_Range1 = new gcp.compute.Subnetwork("range1", {
     ipCidrRange: "172.1.240.0/24",
     region: "us-east1",
@@ -20,30 +22,35 @@ const Network_Range3 = new gcp.compute.Subnetwork("range3", {
     network: vpcNetwork.id,
 });
 
-//Instances
-/*
-const Debian_IP = new gcp.compute.Address("static", {
+//Adresses
+
+const Debian_IP = new gcp.compute.Address("debian", {
+    addressType: 'INTERNAL',
     address: "172.1.240.5",
-    region: "us-east",
+    region: "us-east1",
+    subnetwork:Network_Range1.id,
 });
 
 
 // Create a sample Ubuntu Instance in Pulumi
 const instance1 = new gcp.compute.Instance("My-Instance", {
-    name: "debian_MYSQL",
+    name: "debiansql",
     bootDisk: {
         initializeParams: {
-            image: 	"ubuntu-2004-lts",
+            image: 	"debian-10",
         },
     },
     machineType: "f1-micro",
     zone: "us-east1-b",
     networkInterfaces: [{
-        network: "default",
+        subnetwork:Network_Range1.id,
+        networkIp:Debian_IP.id,
+        accessConfigs:[{}],
     }],
+    
     
     
 
 });
-//Exports
-*/
+//Outputs
+//export const InstanceIP = instance1.networkInterfaces[0].accessConfigs[0].natIp;
