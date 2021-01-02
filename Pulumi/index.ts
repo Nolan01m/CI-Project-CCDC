@@ -22,6 +22,29 @@ const Network_Range3 = new gcp.compute.Subnetwork("range3", {
     network: vpcNetwork.id,
 });
 
+const Firewall = new gcp.compute.Firewall("firewall", {
+    network: vpcNetwork.id,
+    allows: [
+        {
+            protocol: "tcp",
+            ports: [
+                "22",
+                "80",
+                "443",
+            ],
+        },
+        {
+            protocol: "udp",
+            ports: [
+                "22",
+                "80",
+                "443",
+            ],
+        },
+    ],
+    sourceTags: ["web"],
+});
+
 //Adresses
 const Debian_IP = new gcp.compute.Address("debian", {
     addressType: 'INTERNAL',
@@ -70,4 +93,9 @@ const computeInstance2 = new gcp.compute.Instance("Phantom", {
 });
 
 //Outputs
-//export const InstanceIP = instance1.networkInterfaces[0].accessConfigs[0].natIp;
+export const InstanceName = Phantom_IP.id;
+export const InstanceIP = gcp.compute.getAddress({
+    region: "us-east1",
+    name: "phantom-039442a"
+});
+//export const InstanceIP = computeInstance1.networkInterfaces[0].accessConfigs[0].natIp;
