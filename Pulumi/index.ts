@@ -10,16 +10,22 @@ const Network_Range1 = new gcp.compute.Subnetwork("range1", {
     ipCidrRange: "172.1.240.0/24",
     region: "us-east1",
     network: vpcNetwork.id,
+},{
+    parent: vpcNetwork
 });
 const Network_Range2 = new gcp.compute.Subnetwork("range2", {
     ipCidrRange: "172.1.241.0/24",
     region: "us-east1",
     network: vpcNetwork.id,
+},{
+    parent: vpcNetwork
 });
 const Network_Range3 = new gcp.compute.Subnetwork("range3", {
     ipCidrRange: "172.1.242.0/24",
     region: "us-east1",
     network: vpcNetwork.id,
+},{
+    parent: vpcNetwork
 });
 
 const Firewall = new gcp.compute.Firewall("firewall", {
@@ -43,6 +49,8 @@ const Firewall = new gcp.compute.Firewall("firewall", {
         },
     ],
     sourceTags: ["web"],
+},{
+    parent: vpcNetwork
 });
 
 //Adresses
@@ -51,12 +59,18 @@ const Debian_IP = new gcp.compute.Address("debian", {
     address: "172.1.240.5",
     region: "us-east1",
     subnetwork: Network_Range1.id,
+},
+{
+    parent: Network_Range1
 });
 const Phantom_IP = new gcp.compute.Address("phantom", {
     addressType: 'INTERNAL',
     address: "172.1.240.6",
     region: "us-east1",
     subnetwork: Network_Range1.id,
+},
+{
+    parent: Network_Range1
 });
 
 // Create a sample Ubuntu Instance in Pulumi
@@ -98,4 +112,4 @@ export const InstanceIP = gcp.compute.getAddress({
     region: "us-east1",
     name: "phantom-039442a"
 });
-//export const InstanceIP = computeInstance1.networkInterfaces[0].accessConfigs[0].natIp;
+//export const InstanceIP2 = computeInstance1.networkInterfaces[0].accessConfigs[0].natIp.apply(ExternalIP => natIp);
