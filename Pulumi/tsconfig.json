@@ -15,7 +15,5 @@
     },
     "files": [
         "index.ts",
-        "instances.ts",
-        "ips.ts"
     ]
 }

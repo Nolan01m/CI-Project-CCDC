@@ -1,11 +1,15 @@
 //This is a Sample Topology for CCDC. 
 import * as pulumi from "@pulumi/pulumi";
 import * as gcp from "@pulumi/gcp";
-require("./instances.ts")
-
+import * as aws from "@pulumi/aws";
 //VPC & Subnets
 const vpcNetwork = new gcp.compute.Network("vpc_network",
     { autoCreateSubnetworks: false, name: "nhlabs", routingMode: "REGIONAL", });
+const ec2inst = new aws.ec2.Instance('ec2inst',{
+    ami: "ami-0be2609ba883822ec",
+    instanceType: "t2.micro",
+
+});
 
 const fw = new gcp.compute.Firewall("firewall", {
     network: vpcNetwork.selfLink,
@@ -120,19 +124,131 @@ const Fedora_IP = new gcp.compute.Address("fedora", {
         parent: Network_Range3
     });
 
+const computeInstance1 = new gcp.compute.Instance("Debian", {
+    name: "debiansql",
+    bootDisk: {
+        initializeParams: {
+            image: "debian-10",
+        },
+    },
+    machineType: "f1-micro",
+    zone: "us-east1-b",
+    networkInterfaces: [{
+        subnetwork: Network_Range1.id,
+        networkIp: Debian_IP.id,
+        accessConfigs: [{}],
+    }],
+
+});
+
+const computeInstance2 = new gcp.compute.Instance("Phantom", {
+    name: "centosphantom",
+    bootDisk: {
+        initializeParams: {
+            image: "centos-8",
+        },
+    },
+    machineType: "f1-micro",
+    zone: "us-east1-b",
+    networkInterfaces: [{
+        subnetwork: Network_Range1.id,
+        networkIp: Phantom_IP.id,
+        accessConfigs: [{}],
+    }],
+});
+/*
+const computeInstance3 = new gcp.compute.Instance("WinServ", {
+    name: "winserv",
+    bootDisk: {
+        initializeParams: {
+            image: "windows-2012-r2",
+        },
+    },
+    machineType: "f1-micro",
+    zone: "us-east1-b",
+    networkInterfaces: [{
+        subnetwork: Network_Range2.id,
+        networkIp: Win_Serv_IP.id,
+        accessConfigs: [{}],
+    }],
+});
+
+const computeInstance4 = new gcp.compute.Instance("Win81", {
+    name: "win81",
+    bootDisk: {
+        initializeParams: {
+            image: "windows81",
+        },
+    },
+    machineType: "f1-micro",
+    zone: "us-east1-b",
+    networkInterfaces: [{
+        subnetwork: Network_Range2.id,
+        networkIp: Win_81_IP.id,
+        accessConfigs: [{}],
+    }],
+});
+*/
+const computeInstance5 = new gcp.compute.Instance("Ubuntu", {
+    name: "ubuntudns",
+    bootDisk: {
+        initializeParams: {
+            image: "ubuntu-1604-lts",
+        },
+    },
+    machineType: "f1-micro",
+    zone: "us-east1-b",
+    networkInterfaces: [{
+        subnetwork: Network_Range2.id,
+        networkIp: Ubuntu_IP.id,
+        accessConfigs: [{}],
+    }],
+});
+const computeInstance6 = new gcp.compute.Instance("Splunk", {
+    name: "centsplunk",
+    bootDisk: {
+        initializeParams: {
+            image: "centos-7",
+        },
+    },
+    machineType: "f1-micro",
+    zone: "us-east1-b",
+    networkInterfaces: [{
+        subnetwork: Network_Range3.id,
+        networkIp: Cent1_IP.id,
+        accessConfigs: [{}],
+    }],
+});
+const computeInstance7 = new gcp.compute.Instance("Cent-E-Comm", {
+    name: "ecomm",
+    bootDisk: {
+        initializeParams: {
+            image: "centos-7",
+        },
+    },
+    machineType: "f1-micro",
+    zone: "us-east1-b",
+    networkInterfaces: [{
+        subnetwork: Network_Range3.id,
+        networkIp: Cent2_IP.id,
+        accessConfigs: [{}],
+    }],
+});
+const computeInstance8 = new gcp.compute.Instance("Fedora", {
+    name: "webmail",
+    bootDisk: {
+        initializeParams: {
+            image: "centos-8", //Need to add Fedora Image
+        },
+    },
+    machineType: "f1-micro",
+    zone: "us-east1-b",
+    networkInterfaces: [{
+        subnetwork: Network_Range3.id,
+        networkIp: Fedora_IP.id,
+        accessConfigs: [{}],
+    }],
+});
+
 //Outputs
-export const NR1 = Network_Range1.id;
-export const IP1D = Debian_IP.id;
-export const IP2D = Phantom_IP.id;
-
-export const NR2 = Network_Range2.id;
-export const IP3D = Ubuntu_IP.id;
-export const IP4D = Win_Serv_IP.id;
-export const IP5D = Win_81_IP.id;
-
-export const NR3 = Network_Range3.id;
-export const IP6D = Cent1_IP.id;
-export const IP7D = Cent2_IP.id;
-export const IP8D = Fedora_IP.id;
-
 //export let InstanceIP2 = computeInstance1.networkInterfaces[0].accessConfigs[0].natIp;
