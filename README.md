@@ -1,9 +1,11 @@
 # CI-Project-CCDC
 
-[![Deploy](https://get.pulumi.com/new/button.svg)](https://app.pulumi.com/new)
+[![Deploy](https://get.pulumi.com/new/button.svg)](https://app.pulumi.com/new?template=https://github.com/Nolan01m/CI-Project-CCDC/tree/main/Pulumi)
 
-A project using Puppet and Pulumi to Deploy Competition Infrastructure. 
+A multi-cloud project using Pulumi & Puppet to Deploy Competition Infrastructure.
 
+AWS -- Windows Hosts
+GCP -- Linux Hosts
 
 172.1.240.x --
 1 - CentOS
