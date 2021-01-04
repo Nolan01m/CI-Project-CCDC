@@ -5,11 +5,6 @@ import * as aws from "@pulumi/aws";
 //VPC & Subnets
 const vpcNetwork = new gcp.compute.Network("vpc_network",
     { autoCreateSubnetworks: false, name: "nhlabs", routingMode: "REGIONAL", });
-const ec2inst = new aws.ec2.Instance('ec2inst',{
-    ami: "ami-0be2609ba883822ec",
-    instanceType: "t2.micro",
-
-});
 
 const fw = new gcp.compute.Firewall("firewall", {
     network: vpcNetwork.selfLink,
@@ -156,39 +151,21 @@ const computeInstance2 = new gcp.compute.Instance("Phantom", {
         accessConfigs: [{}],
     }],
 });
-/*
-const computeInstance3 = new gcp.compute.Instance("WinServ", {
-    name: "winserv",
-    bootDisk: {
-        initializeParams: {
-            image: "windows-2012-r2",
-        },
-    },
-    machineType: "f1-micro",
-    zone: "us-east1-b",
-    networkInterfaces: [{
-        subnetwork: Network_Range2.id,
-        networkIp: Win_Serv_IP.id,
-        accessConfigs: [{}],
-    }],
+
+const computeInstance3 = new aws.ec2.Instance('WinServ',{
+    associatePublicIpAddress: true,
+    getPasswordData: true,
+    ami: "ami-0093d2a4365944361", //Server2012
+    instanceType: "t2.micro",
 });
 
-const computeInstance4 = new gcp.compute.Instance("Win81", {
-    name: "win81",
-    bootDisk: {
-        initializeParams: {
-            image: "windows81",
-        },
-    },
-    machineType: "f1-micro",
-    zone: "us-east1-b",
-    networkInterfaces: [{
-        subnetwork: Network_Range2.id,
-        networkIp: Win_81_IP.id,
-        accessConfigs: [{}],
-    }],
+const computeInstance4 = new aws.ec2.Instance('Win81',{
+    associatePublicIpAddress: true,
+    getPasswordData: true,
+    ami: "ami-0093d2a4365944361", //Server2012 -- no-public-av-win81
+    instanceType: "t2.micro",
 });
-*/
+
 const computeInstance5 = new gcp.compute.Instance("Ubuntu", {
     name: "ubuntudns",
     bootDisk: {
@@ -252,3 +229,4 @@ const computeInstance8 = new gcp.compute.Instance("Fedora", {
 
 //Outputs
 //export let InstanceIP2 = computeInstance1.networkInterfaces[0].accessConfigs[0].natIp;
+export const ec2_inst = computeInstance3.publicIp;
