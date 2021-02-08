@@ -3,9 +3,9 @@
 [![Deploy](https://get.pulumi.com/new/button.svg)](https://app.pulumi.com/new?template=https://github.com/Nolan01m/CI-Project-CCDC/tree/main/Pulumi)
 
 A multi-cloud project using Pulumi & Puppet to Deploy Competition Infrastructure.
-AWS -- Windows Hosts
-GCP -- Linux Hosts
-[![Cloud_Agnostic Commit](https://github.com/Nolan01m/CI-Project-CCDC/commit/0f814c91eff68904c249d3f149ba1ebc9e549ba1)]
+* AWS -- Windows Hosts
+* GCP -- Linux Hosts
+[![AWS_GCP Commit](https://github.com/Nolan01m/CI-Project-CCDC/tree/0f814c91eff68904c249d3f149ba1ebc9e549ba1)]
 
 172.1.240.x --
 1 - CentOS
