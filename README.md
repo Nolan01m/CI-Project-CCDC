@@ -2,8 +2,6 @@
 
 [![Deploy](https://get.pulumi.com/new/button.svg)](https://app.pulumi.com/new?template=https://github.com/Nolan01m/CI-Project-CCDC/tree/main/Pulumi)
 
-
-## A project using Pulumi(Typescript) & Puppet Bolt to Deploy Competition Infrastructure on Azure.
 <!-- TABLE OF CONTENTS -->
 <details open="open">
   <summary>Table of Contents</summary>
@@ -31,6 +29,18 @@
   </ol>
 </details>
 
+## About The Project
+
+A project using Infrastructure as Code to Deploy Competition Infrastructure on Azure.
+
+### Built With
+
+* [Pulumi](https://www.pulumi.com/)
+* [Packer](https://www.packer.io/)
+* [Puppet_Bolt](https://puppet.com/docs/bolt/latest/bolt.html)
+* [Docker](https://www.docker.com/)
+
+
 172.1.240.x --
 1 - CentOS
 1 - Debian
@@ -44,7 +54,8 @@
 2 - CentOS
 1 - Fedora
 
-<!-- ROADMAP -->
+
+
 ## Roadmap
 
 See the [project dashbaord](https://github.com/Nolan01m/CI-Project-CCDC/projects/1) for a list of proposed features (and known issues).
