@@ -2,7 +2,34 @@
 
 [![Deploy](https://get.pulumi.com/new/button.svg)](https://app.pulumi.com/new?template=https://github.com/Nolan01m/CI-Project-CCDC/tree/main/Pulumi)
 
+
 ## A project using Pulumi(Typescript) & Puppet Bolt to Deploy Competition Infrastructure on Azure.
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#extras">Extras</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgements">Acknowledgements</a></li>
+  </ol>
+</details>
 
 172.1.240.x --
 1 - CentOS
@@ -17,8 +44,13 @@
 2 - CentOS
 1 - Fedora
 
-## A multi-cloud project using Pulumi & Puppet to Deploy Competition Infrastructure.
+<!-- ROADMAP -->
+## Roadmap
 
-* AWS -- Windows Hosts || GCP -- Linux Hosts
+See the [project dashbaord](https://github.com/Nolan01m/CI-Project-CCDC/projects/1) for a list of proposed features (and known issues).
+
+
+## Extras
+(Previous)A multi-cloud project: AWS -- Windows Hosts || GCP -- Linux Hosts
 * [![MultiCloud Commit](https://github.com/Nolan01m/CI-Project-CCDC/tree/0f814c91eff68904c249d3f149ba1ebc9e549ba1)]
 
