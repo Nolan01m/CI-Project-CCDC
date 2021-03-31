@@ -1,45 +1,20 @@
 import * as pulumi from "@pulumi/pulumi";
-import * as azure_nextgen from "@pulumi/azure-nextgen";
-//import * as compute from "@pulumi/azure-nextgen/compute/latest";
-
+import * as resources from "@pulumi/azure-native/resources";
+import * as storage from "@pulumi/azure-native/storage";
 
 // Create an Azure Resource Group
-const resourceGroup = new azure_nextgen.resources.latest.ResourceGroup("resourceGroup", {
-    resourceGroupName: "my-rg-ccdc",
-    location: "eastus",
+const resourceGroup = new resources.ResourceGroup("resourceGroup");
+
+// Create an Azure resource (Storage Account)
+const storageAccount = new storage.StorageAccount("sa", {
+    resourceGroupName: resourceGroup.name,
+    sku: {
+        name: storage.SkuName.Standard_LRS,
+    },
+    kind: storage.Kind.StorageV2,
 });
 
-//https://www.pulumi.com/docs/reference/pkg/azure-nextgen/compute/virtualmachine/
-const virtualMachine = new azure_nextgen.compute.latest.VirtualMachine("Ubuntu Wkst", {
-    hardwareProfile: {
-        vmSize: "B1s",
-    },
-    location: "westus",
-    networkProfile: {
-        networkInterfaces: [{
-            id: "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/{existing-nic-name}",
-            primary: true,
-        }],
-    },
-    osProfile: {
-        adminPassword: "P@ssw0rdP@ssw0rd",
-        adminUsername: "ccdc-admin",
-        computerName: "Ubuntu_Wkst",
-    },
-    resourceGroupName: "my-rg-ccdc",
-    storageProfile: {
-        osDisk: {
-            caching: "ReadWrite",
-            createOption: "FromImage",
-            image: {
-                uri: "http://{existing-storage-account-name}.blob.core.windows.net/{existing-container-name}/UbuntuServer1804LTS.vhd",
-            },
-            name: "myVMosdisk",
-            osType: "Linux",
-            vhd: {
-                uri: "http://{existing-storage-account-name}.blob.core.windows.net/{existing-container-name}/myDisk.vhd",
-            },
-        },
-    },
-    vmName: "{vm-name}",
-});
+// Export the primary key of the Storage Account
+const storageAccountKeys = pulumi.all([resourceGroup.name, storageAccount.name]).apply(([resourceGroupName, accountName]) =>
+    storage.listStorageAccountKeys({ resourceGroupName, accountName }));
+export const primaryStorageKey = storageAccountKeys.keys[0].value;
