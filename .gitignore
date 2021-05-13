@@ -1,6 +1,9 @@
 /.pulumi/
 /.vscode/
 /.vs/
+/isos/
+**/packer_cache/**
+**packer/output**
 bin/
 build/
 node_modules/
