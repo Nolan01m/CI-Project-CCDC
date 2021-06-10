@@ -18,7 +18,14 @@
             "headless": true,
             "http_directory": ".",
             "boot_command": [
-                "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/scripts/centos-6-kickstart.cfg<enter><wait>"
+                "<wait5><tab><end>",
+                "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+                "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+                "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+                "<bs><bs><bs><bs><bs><bs><bs>",
+                "<bs><bs><bs><bs><bs><bs><bs>",
+                "inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg",
+                "<enter><enter><wait20><enter><wait><enter><wait><enter><wait><enter><wait><enter><wait60><enter><wait><enter><wait><enter><wait><enter><wait10m>administrator<enter><wait><enter><wait>P@ssw0rd<enter><wait>P@ssw0rd<enter><wait><enter><wait20><enter><wait2m>"
             ]
         }
     ]
