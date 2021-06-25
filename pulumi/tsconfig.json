@@ -14,7 +14,6 @@
         "suppressImplicitAnyIndexErrors": true
     },
     "files": [
-        "index.ts",
-        "network.ts"
+        "index.ts"
     ]
 }
