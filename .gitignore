@@ -24,3 +24,4 @@ vendor
 Gopkg.lock
 output-Ubuntu-16-min/
 **/ci-scripts
+pulumi/.vscode/settings.json
